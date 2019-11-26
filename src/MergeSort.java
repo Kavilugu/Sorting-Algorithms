@@ -45,7 +45,7 @@ public class MergeSort {
         MergeSort m = new MergeSort();
         int[] data = MyInsertionTest.readIntfile("files/largeints"); // Also try "largeints"!
         int N = data.length;    // Change to some smaller number to test on part of array.
-        System.out.println(data.length);
+
 
         // Look at numbers before sorting, unless there are too many of them.
         if (N <= 1000) {

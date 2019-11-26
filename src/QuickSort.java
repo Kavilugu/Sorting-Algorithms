@@ -18,18 +18,18 @@ public class QuickSort {
 
     public int sortForReal(int[] a, int lo, int hi) {
         int pivot = a[lo];
-        int i = a[lo+1];
-        int j = a[hi];
+        int i = lo;
+        int j = hi+1;
 
         while (true){
-            while(a[i] < pivot) {
-                i++;
+            while(a[++i] < pivot) {
+
                 if (i == hi) {
                     break;
                 }
             }
-            while (a[j] > pivot) {
-                j--;
+            while (pivot < a[--j] ) {
+
                 if (j == lo) {
                     break;
                 }
@@ -37,15 +37,15 @@ public class QuickSort {
             if (i >= j) {
                 break;
             }
-            swap(a, a[i], a[j]);
+            swap(a, i, j);
         }
-        swap(a, pivot, a[j]);
+        swap(a, lo, j);
         return j;
     }
 
     public void swap(int[] a, int i, int j) {
-        int temp = i;
-        a[i] = j;
+        int temp = a[i];
+        a[i] = a[j];
         a[j] = temp;
     }
 
@@ -55,20 +55,14 @@ public class QuickSort {
         int N = data.length;    // Change to some smaller number to test on part of array.
 
         // Look at numbers before sorting, unless there are too many of them.
-        if (N <= 1000) {
-            for (int i = 0; i < N; i++) { System.out.print(data[i]+" "); }
-            System.out.print("\n\n");
-        }
+
 
         long before = System.currentTimeMillis();
         q.startQuicksort(data, 0, N-1);
         long after = System.currentTimeMillis();
 
         // Look at numbers after sorting, unless there are too many of them.
-        if (N <= 1000) {
-            for (int i = 0; i < N; i++) { System.out.print(data[i]+" "); }
-            System.out.print("\n");
-        }
+
 
         if (MyInsertionTest.isSorted(data, 0, N-1)) {
             System.out.println((after-before) / 1000.0 + " seconds");
