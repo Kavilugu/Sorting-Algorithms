@@ -12,7 +12,7 @@ public class MyInsertionTest {
     }
 
     // Checks if the first n element of a are in sorted order.
-    private static boolean isSorted(int[] a, int lo, int hi) {
+     static boolean isSorted(int[] a, int lo, int hi) {
         int flaws = 0;
         for (int i = lo+1; i <= hi; i++) {
             if (a[i] < a[i-1]) {
