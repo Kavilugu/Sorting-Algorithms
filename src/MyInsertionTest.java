@@ -47,7 +47,7 @@ public class MyInsertionTest {
     }
 
     public static void main(String[] args) throws Exception {
-        int[] data = readIntfile("smallints"); // Also try "largeints"!
+        int[] data = readIntfile("C:\\Users\\adolf\\IdeaProjects\\Sorting-Algorithms\\files\\smallints"); // Also try "largeints"!
         int N = data.length;    // Change to some smaller number to test on part of array.
 
         // Look at numbers before sorting, unless there are too many of them.
