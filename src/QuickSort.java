@@ -50,7 +50,7 @@ public class QuickSort {
     }
 
     public static void main(String[] args) throws Exception {
-       QuickSort q = new QuickSort();
+        QuickSort q = new QuickSort();
         int[] data = MyInsertionTest.readIntfile("files/smallints"); // Also try "largeints"!
         int N = data.length;    // Change to some smaller number to test on part of array.
 
