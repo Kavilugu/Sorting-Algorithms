@@ -18,17 +18,16 @@ public class QuickSort {
 
     public int sortForReal(int[] a, int lo, int hi) {
         int pivot = a[lo];
-        int i = a[lo+1];
-        int j = a[hi];
+        int i = lo;
+        int j = hi+1;
 
         while (true){
-            while(a[i] < pivot) {
-                i++;
+            while(a[++i] < pivot) {
                 if (i == hi) {
                     break;
                 }
             }
-            while (a[j] > pivot) {
+            while (a[--j] > pivot) {
                 j--;
                 if (j == lo) {
                     break;
