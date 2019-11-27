@@ -7,6 +7,7 @@ public class MergeSort {
     }
 
     public void mergeSort(int[] a, int[] aux, int lo, int hi){
+
         if(hi <= lo) {
             return;
         }
@@ -15,8 +16,10 @@ public class MergeSort {
         mergeSort(a,aux,mid + 1,hi);
         merge(a,aux,lo,mid,hi);
 
+
     }
     public void merge(int[] a,int[] aux,int lo, int mid, int hi){
+
         for(int i = lo; i <= hi; i++){
             aux[i] = a[i];
         }
@@ -44,7 +47,7 @@ public class MergeSort {
     public static void main(String[] args) throws Exception {
         MergeSort m = new MergeSort();
         int[] data = MyInsertionTest.readIntfile("files/largeints"); // Also try "largeints"!
-        int N = data.length;    // Change to some smaller number to test on part of array.
+        int N = 1001;    // Change to some smaller number to test on part of array.
 
 
         // Look at numbers before sorting, unless there are too many of them.
