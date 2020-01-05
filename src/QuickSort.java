@@ -1,23 +1,23 @@
-import java.util.Arrays;
+import java.util.Random;
 
 public class QuickSort {
 
     public void startQuicksort(int[] a, int lo, int hi) {
-        quickSortLo(a, lo, hi);
+        quickSort(a, lo, hi);
     }
 
 
-    public void quickSortLo(int[] a, int lo, int hi) {
+    public void quickSort(int[] a, int lo, int hi) {
 
         if (hi <= lo) {
             return;
         }
-        int sort = sortForRealLo(a, lo, hi);
-        quickSortLo(a, lo, sort - 1);
-        quickSortLo(a, sort + 1, hi);
+        int sort = sortForReal(a, lo, hi);
+        quickSort(a, lo, sort - 1);
+        quickSort(a, sort + 1, hi);
     }
 
-    public int sortForRealLo(int[] a, int lo, int hi) {
+    public int sortForReal(int[] a, int lo, int hi) {
         int pivot = a[lo];
         int i = lo;
         int j = hi + 1;
@@ -49,52 +49,21 @@ public class QuickSort {
         a[i] = a[j];
         a[j] = temp;
     }
-    public void quickSortHi(int[] a, int lo, int hi) {
-
-        if (hi <= lo) {
-            return;
-        }
-        int sort = sortForRealHi(a, lo, hi);
-        quickSortHi(a, lo, sort - 1);
-        quickSortHi(a, sort + 1, hi);
-    }
-
-    public int sortForRealHi(int[] a, int lo, int hi) {
-        int pivot = a[hi];
-        int i = lo;
-
-        for (int j = lo; j < hi; j++) {
-            if (a[j] < pivot) {
-                int temp = a[j];
-                a[j] = a[i];
-                a[i] = temp;
-                i++;
-            }
-        }
-        a[hi] = a[i];
-        a[i] = pivot;
-
-        return i;
-    }
-
-    private void testLoWorstCondition() {
+    private void testHiDefault(){
         int[] data = new int[0]; // Also try "largeints"!
         try {
-            data = MyInsertionTest.readIntfile("files/largeints");
+            data = MyInsertionTest.readIntfile("files/smallints");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int N = 70000;    // Change to some smaller number to test on part of array.
+        int N = data.length;    // Change to some smaller number to test on part of array.
 
         // Look at numbers before sorting, unless there are too many of them.
 
+        int temp = data[N-1];
+        data[N-1] = data[0];
+        data[0] = temp;
 
-        Arrays.sort(data);
-        for (int i = 0; i < data.length / 2; ++i) {
-            int temp = data[i];
-            data[i] = data[data.length - i - 1];
-            data[data.length - i - 1] = temp;
-        }
         long before = System.currentTimeMillis();
         startQuicksort(data, 0, N - 1);
         long after = System.currentTimeMillis();
@@ -110,11 +79,11 @@ public class QuickSort {
     private void testLoDefault() {
         int[] data = new int[0]; // Also try "largeints"!
         try {
-            data = MyInsertionTest.readIntfile("files/largeints");
+            data = MyInsertionTest.readIntfile("files/smallints");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int N = 70000;    // Change to some smaller number to test on part of array.
+        int N = data.length;    // Change to some smaller number to test on part of array.
 
         // Look at numbers before sorting, unless there are too many of them.
 
@@ -130,69 +99,74 @@ public class QuickSort {
         }
     }
 
-    private void testHiDefault() {
-
+    private void testMiddleDefault() {
         int[] data = new int[0]; // Also try "largeints"!
         try {
-            data = MyInsertionTest.readIntfile("files/largeints");
+            data = MyInsertionTest.readIntfile("files/smallints");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int N = 30000;    // Change to some smaller number to test on part of array.
+        int N = data.length;    // Change to some smaller number to test on part of array.
 
         // Look at numbers before sorting, unless there are too many of them.
 
+        int temp = data[(N/2)-1];
+        data[(N/2)-1] = data[0];
+        data[0] = temp;
 
         long before = System.currentTimeMillis();
-        quickSortHi(data, 0, N-1);
+        startQuicksort(data, 0, N - 1);
         long after = System.currentTimeMillis();
 
         // Look at numbers after sorting, unless there are too many of them.
 
 
-        if (MyInsertionTest.isSorted(data, 0, N-1)) {
-            System.out.println((after-before) / 1000.0 + " seconds");
+        if (MyInsertionTest.isSorted(data, 0, N - 1)) {
+            System.out.println((after - before) / 1000.0 + " seconds");
         }
     }
 
-    private void testHiWorst() {
-
+    private void testRandomDefault() {
         int[] data = new int[0]; // Also try "largeints"!
         try {
-            data = MyInsertionTest.readIntfile("files/largeints");
+            data = MyInsertionTest.readIntfile("files/smallints");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int N = 30000;    // Change to some smaller number to test on part of array.
+        int N = data.length;    // Change to some smaller number to test on part of array.
 
         // Look at numbers before sorting, unless there are too many of them.
 
+        Random rand = new Random();
+        int randomPivot = rand.nextInt(N-1);
+        int temp = data[randomPivot];
+        data[randomPivot] = data[0];
+        data[0] = temp;
 
-        Arrays.sort(data);
         long before = System.currentTimeMillis();
-        quickSortHi(data, 0, N-1);
+        startQuicksort(data, 0, N - 1);
         long after = System.currentTimeMillis();
 
         // Look at numbers after sorting, unless there are too many of them.
 
 
-        if (MyInsertionTest.isSorted(data, 0, N-1)) {
-            System.out.println((after-before) / 1000.0 + " seconds");
+        if (MyInsertionTest.isSorted(data, 0, N - 1)) {
+            System.out.println((after - before) / 1000.0 + " seconds");
         }
     }
-
 
 
 
     public static void main(String[] args) throws Exception {
         QuickSort q = new QuickSort();
-        System.out.println("Default condition, low:");
+        System.out.println("pivot - low:");
         q.testLoDefault();
-        System.out.println("Worst condition, low:");
-        q.testLoWorstCondition();
-        System.out.println("Default condition, high:");
+        System.out.println("pivot - high:");
         q.testHiDefault();
-        System.out.println("Worst condition, high:");
-        q.testHiWorst();
+        System.out.println("pivot - middle:");
+        q.testMiddleDefault();
+        System.out.println("pivot - random");
+        q.testRandomDefault();
+
     }
 }
